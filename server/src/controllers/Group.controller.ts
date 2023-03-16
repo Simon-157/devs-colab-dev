@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Group from "../models/group";
 import GroupMember from "../models/groupMember";
 
-async function createGroup(req: Request, res: Response) {
+const createGroup = async (req: Request, res: Response)  =>{
   try {
     const { name } = req.body;
 
@@ -24,7 +24,7 @@ async function createGroup(req: Request, res: Response) {
   }
 }
 
-async function joinGroup(req: Request, res: Response) {
+const joinGroup = async (req: Request, res: Response)  => {
   try {
     const { group_id } = req.params;
     const { user_id } = req.params; // Assuming there is an authentication middleware that sets the user ID on the request object
@@ -47,7 +47,7 @@ async function joinGroup(req: Request, res: Response) {
   }
 }
 
-async function leaveGroup(req: Request, res: Response) {
+const leaveGroup = async (req: Request, res: Response) =>{
   try {
     const { group_id } = req.params;
     const { user_id } = req.params; // Assuming there is  an authentication middleware that sets the user ID on the request object

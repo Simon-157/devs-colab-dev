@@ -1,6 +1,8 @@
 import { Router, Response, Request } from "express";
 import PracticeProblem from "../models/problem";
-async function createPracticeProblem(req: Request, res: Response) {
+
+
+const createProblem = async (req: Request, res: Response) => {
   try {
     const { title, description, solution } = req.body;
 
@@ -17,7 +19,7 @@ async function createPracticeProblem(req: Request, res: Response) {
   }
 }
 
-async function getPracticeProblem(req: Request, res: Response) {
+const getProblemById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
@@ -34,4 +36,4 @@ async function getPracticeProblem(req: Request, res: Response) {
   }
 }
 
-export { createPracticeProblem, getPracticeProblem };
+export { createProblem, getProblemById };

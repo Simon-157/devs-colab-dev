@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import GroupMember from "../models/groupMember";
 
-async function getGroupMembers(req:Request, res:Response) {
+const getGroupMembers = async (req:Request, res:Response) => {
   try {
     const { group_id } = req.params;
 

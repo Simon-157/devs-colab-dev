@@ -2,7 +2,7 @@ import { Response, Request } from "express";
 import User from "../models/users";
 import { UserInterface } from "../types/user";
 
-async function createUser(req: Request, res: Response): Promise<void> {
+const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { username, email, password }: { username: string; email: string; password: string } = req.body;
 
@@ -19,7 +19,7 @@ async function createUser(req: Request, res: Response): Promise<void> {
   }
 }
 
-async function getUser(req: Request, res: Response) {
+const getUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 

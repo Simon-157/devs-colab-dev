@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-
+require('./services/db');
 const problemRoutes = require('./routes/problem-routes');
 const groupRoutes = require('./routes/group-routes');
 const groupMemberRoutes = require('./routes/group-member-route');

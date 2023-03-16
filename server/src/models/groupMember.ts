@@ -1,4 +1,5 @@
 import { DataTypes } from "sequelize";
+import sequelize from "../config/pg";
 
 const GroupMember = sequelize.define('GroupMember', {
   id: {

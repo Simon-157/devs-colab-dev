@@ -1,4 +1,6 @@
 import { DataTypes } from "sequelize";
+import sequelize from "../config/pg";
+
 
 const CodeEditor = sequelize.define('CodeEditor', {
   id: {

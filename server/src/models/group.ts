@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-require('../config/postgres');
+import sequelize from "../config/pg";
 
 const Group = sequelize.define('Group', {
   id: {

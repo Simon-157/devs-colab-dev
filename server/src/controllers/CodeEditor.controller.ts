@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import CodeEditor from "../models/codeEditor";
 
-async function createCodeEditor(req:Request, res:Response) {
+const createCodeEditor = async (req: Request, res: Response) => {
   try {
     const { group_id, problem_id } = req.body;
 
@@ -13,11 +13,11 @@ async function createCodeEditor(req:Request, res:Response) {
     res.status(201).json(codeEditor);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
-}
+};
 
-async function updateCodeEditor(req:Request, res:Response) {
+const updateCodeEditor = async (req: Request, res: Response) => {
   try {
     const { code } = req.body;
     const { codeEditorId } = req.params;
@@ -25,7 +25,7 @@ async function updateCodeEditor(req:Request, res:Response) {
     const codeEditor = await CodeEditor.findByPk(codeEditorId);
 
     if (!codeEditor) {
-      return res.status(404).json({ message: 'Code editor not found' });
+      return res.status(404).json({ message: "Code editor not found" });
     }
 
     codeEditor.code = code;
@@ -34,11 +34,8 @@ async function updateCodeEditor(req:Request, res:Response) {
     res.status(200).json(codeEditor);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
-}
-
-export {
-  createCodeEditor,
-  updateCodeEditor,
 };
+
+export { createCodeEditor, updateCodeEditor };

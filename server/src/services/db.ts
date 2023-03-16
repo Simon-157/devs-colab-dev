@@ -1,5 +1,5 @@
-// const sequelize = require('../config/pg');
-// const { client } = require('../config/redis');
+const sequelize = require('../config/pg');
+const { client } = require('../config/redis');
 
 async function connect() {
   try {
@@ -18,4 +18,4 @@ async function connect() {
   }
 }
 
-module.exports = connect;
+connect();
