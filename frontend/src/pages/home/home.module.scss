@@ -1,0 +1,99 @@
+.Wrapper{
+    overflow:hidden;
+    width: 100vw;
+    height: 62.25vh;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    //:;
+    >div{
+    position:absolute;
+    text-align: center;
+    left:12rem;
+    right:15rem;
+    top:10rem;
+    font-size:150%;
+    text-align:center;
+        color: rgb(8, 8, 70);
+
+        & strong{
+            color: rgb(6, 51, 4);
+            font-size: larger;
+        }
+    }
+
+    .joinBtn{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        top: 18rem;
+
+        button{
+            cursor: pointer;
+            background-color: rgb(16, 16, 66);
+            width: auto;
+            animation: button-animate 1s linear infinite alternate;
+            -webkit-animation: button-animate 1s linear infinite alternate;
+            a{
+            font-size:120%;
+            cursor: pointer;
+            text-transform:capitalize;
+            color: rgb(143, 189, 142) ;
+            }
+        }
+        
+    }
+
+    .codeShot{
+        position:relative;
+        height:35rem;
+        width:30rem;
+        top:70%;
+
+        img{
+            position: absolute;
+            right:-65%;
+            top:10%;
+            z-index:1;
+            bottom: 50%;
+            width: 100%;
+            animation: suspend 1s linear infinite alternate;
+        }
+    }
+}
+
+.arbitrary{
+    height:25vh;
+    box-sizing: border-box;
+    // position: fixed;
+    border-radius: 60% 0% 0% 0% / 100px;
+    background-color: rgba(3, 2, 24, 0.938);
+    -webkit-border-radius: 60% 0% 0% 0% / 100px;
+    -moz-border-radius: 60% 0% 0% 0% / 100px;
+    -ms-border-radius: 60% 0% 0% 0% / 100px;
+    -o-border-radius: 60% 0% 0% 0% / 100px;
+}   
+
+
+//Animations 
+@keyframes suspend {
+    from {
+      transform: translateY(-1rem);
+    }
+    to {
+      transform: translateY(0rem);
+    }
+  }
+
+@keyframes button-animate {
+    0% {
+        box-shadow: 0px 0px 0.5rem #0B0055;
+    }
+    50% {
+        box-shadow: 0px 0px 1px #0B0055;
+    }
+    100% {
+        box-shadow: 0px 0px 2rem #0B0055;
+    }
+}
+    
