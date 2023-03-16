@@ -10,10 +10,10 @@ To get started with this project, clone this repository to your local machine an
 2. Create a `.env.local` file and add the following environment variables:
 
 `
-DB_HOST=[your database host]
-DB_PORT=[your database port]
-DB_NAME=[your database name]
-DB_USER=[your database username]
+DB_HOST=[your database host] \n
+DB_PORT=[your database port] \n
+DB_NAME=[your database name] \n
+DB_USER=[your database username] \n
 DB_PASSWORD=[your database password]
 `
 
