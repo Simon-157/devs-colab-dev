@@ -1,0 +1,65 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital@0;1&family=Mulish:wght@500&family=PT+Sans+Narrow&family=Poppins&display=swap");
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+////colors
+$pink-1: #f72585;
+$pink-2: #b5179e;
+$purple-1: #560bad;
+$purple-2: #3a0ca3;
+
+$white-bg: #eafcff;
+$blue-dark: #0b0055;
+$blue-medium: #00017a;
+$blue-light: #0053a6;
+$blue-lightest: #0079f2;
+$orange-dark: #f95d1d;
+$orange-medium: #fc6d1c;
+$orange-light: #fe780e;
+
+:root {
+  --colab-font: "Mulish", sans-serif;
+  --colab-background-color: linear-gradient(to right, #ffff, #ece9e6);
+  --web-kit: -webkit-linear-gradient(to left, #ffff, #ffffff);
+  --background: $white-bg;
+}
+
+body {
+  font-family: var(--colab-font);
+  background: $white-bg;
+  overflow-x: hidden;
+}
+
+button,
+select {
+  outline: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a3b16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(218, 188, 188);
+}

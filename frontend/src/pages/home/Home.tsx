@@ -13,7 +13,6 @@ import homeStyles from './home.module.scss'
 import CodeShot from  "@/assets/code-shot.png"
 
 
-
 const Home = () => {
   const {currentUser} = useContext(userContext)
 
@@ -49,8 +48,8 @@ const Home = () => {
         </div>
     </div>
     <div className={homeStyles.arbitrary}>
-      <Footer />
     </div>
+      <Footer />
     </>
   )
 }
