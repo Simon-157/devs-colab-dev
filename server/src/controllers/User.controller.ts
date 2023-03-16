@@ -1,23 +1,39 @@
-const redisClient = require('../config/redis');
+import { Router, Response, Request } from "express";
+async function createUser(req:Request, res:Response) {
+  try {
+    const { username, email, password } = req.body;
 
-const getUser = async (id: any) => {
-  const user = await redisClient.hgetall(`user:${id}`);
-  if (!user) {
-    return null;
+    const user = await User.create({
+      username,
+      email,
+      password,
+    });
+
+    res.status(201).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
   }
-  user.id = parseInt(user.id);
-  user.created_at = new Date(user.created_at);
-  user.updated_at = new Date(user.updated_at);
-  return user;
-};
+}
 
-const createUser = async (user: { id: any; created_at: Date; updated_at: Date; }) => {
-  const userId = await redisClient.incr('next_user_id');
-  user.id = userId;
-  user.created_at = new Date();
-  user.updated_at = new Date();
-  await redisClient.hmset(`user:${userId}`, user);
-  return user;
-};
+async function getUser(req:Request, res:Response) {
+  try {
+    const { id } = req.params;
 
-module.exports = { getUser, createUser };
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+module.exports = {
+  createUser,
+  getUser,
+};
