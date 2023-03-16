@@ -2,11 +2,10 @@ import express, { Application, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
-// Import the various routes
-import problemRoutes from './routes/problem';
-import groupRoutes from './routes/group';
-import groupMemberRoutes from './routes/groupMember';
-import codeEditorRoutes from './routes/codeEditor';
+const problemRoutes = require('./routes/problem-routes');
+const groupRoutes = require('./routes/group-routes');
+const groupMemberRoutes = require('./routes/group-member-route');
+const codeEditorRoutes = require('./routes/code-editor-routes');
 
 dotenv.config();
 

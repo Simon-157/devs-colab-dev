@@ -1,3 +1,5 @@
+import { DataTypes } from "sequelize";
+
 const PracticeProblem = sequelize.define('PracticeProblem', {
   id: {
     type: DataTypes.INTEGER,
@@ -19,4 +21,4 @@ const PracticeProblem = sequelize.define('PracticeProblem', {
   },
 });
 
-module.exports = PracticeProblem;
+export default PracticeProblem;

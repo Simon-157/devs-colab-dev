@@ -1,3 +1,4 @@
+import { DataTypes } from "sequelize";
 require('../config/postgres');
 
 const Group = sequelize.define('Group', {
@@ -21,4 +22,4 @@ const Group = sequelize.define('Group', {
   },
 });
 
-module.exports = Group;
+export default Group;

@@ -1,3 +1,6 @@
+import { Router } from "express";
+
+export const router = Router();
 
 const { getGroupMembers } = require('../controllers/groupMemberController');
 

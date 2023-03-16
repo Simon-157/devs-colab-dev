@@ -1,4 +1,6 @@
+import { Router } from "express";
 
+export const router = Router();
 
 const { createProblem, getProblemById } = require('../controllers/problemController');
 

@@ -1,3 +1,4 @@
+import { DataTypes } from "sequelize";
 
 const GroupMember = sequelize.define('GroupMember', {
   id: {
@@ -24,4 +25,4 @@ const GroupMember = sequelize.define('GroupMember', {
   },
 });
 
-module.exports = GroupMember;
+export default GroupMember;

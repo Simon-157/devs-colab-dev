@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import GroupMember from "../models/groupMember";
+
 async function getGroupMembers(req:Request, res:Response) {
   try {
     const { group_id } = req.params;
@@ -15,7 +17,6 @@ async function getGroupMembers(req:Request, res:Response) {
     res.status(500).json({ message: 'Server error' });
   }
 }
-
-module.exports = {
+export {
   getGroupMembers,
 };

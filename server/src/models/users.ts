@@ -1,7 +1,27 @@
-const { DataTypes } = require('sequelize');
+import { Model,DataTypes, Optional } from 'sequelize';
 require('../config/postgres');
 
-const User = sequelize.define('User', {
+interface UserAttributes {
+  id: number;
+  username: string;
+  email: string;
+  password_hash: string;
+}
+
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  public id!: number;
+  public username!: string;
+  public email!: string;
+  public password_hash!: string;
+
+  // timestamps!
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
+}
+
+User.init({
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -23,7 +43,8 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
 }, {
+  sequelize,
   timestamps: true,
 });
 
-module.exports = User;
+export default User;

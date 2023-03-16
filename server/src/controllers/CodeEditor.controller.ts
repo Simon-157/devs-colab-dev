@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { ReplOptions } from "repl";
+import CodeEditor from "../models/codeEditor";
+
 async function createCodeEditor(req:Request, res:Response) {
   try {
     const { group_id, problem_id } = req.body;
@@ -37,7 +38,7 @@ async function updateCodeEditor(req:Request, res:Response) {
   }
 }
 
-module.exports = {
+export {
   createCodeEditor,
   updateCodeEditor,
 };

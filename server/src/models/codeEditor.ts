@@ -1,3 +1,5 @@
+import { DataTypes } from "sequelize";
+
 const CodeEditor = sequelize.define('CodeEditor', {
   id: {
     type: DataTypes.INTEGER,
@@ -35,4 +37,4 @@ const CodeEditor = sequelize.define('CodeEditor', {
   },
 });
 
-module.exports = CodeEditor;
+export default CodeEditor;

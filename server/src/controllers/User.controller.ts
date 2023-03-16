@@ -1,39 +1,39 @@
-import { Router, Response, Request } from "express";
-async function createUser(req:Request, res:Response) {
-  try {
-    const { username, email, password } = req.body;
+import { Response, Request } from "express";
+import User from "../models/users";
+import { UserInterface } from "../types/user";
 
-    const user = await User.create({
+async function createUser(req: Request, res: Response): Promise<void> {
+  try {
+    const { username, email, password }: { username: string; email: string; password: string } = req.body;
+
+    const user: UserInterface = await User.create({
       username,
       email,
-      password,
+      password_hash: password,
     });
 
     res.status(201).json(user);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
-async function getUser(req:Request, res:Response) {
+async function getUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    const user = await User.findByPk(id);
+    const user: UserInterface | null = await User.findByPk(id);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.status(200).json(user);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
-module.exports = {
-  createUser,
-  getUser,
-};
+export { createUser, getUser };
