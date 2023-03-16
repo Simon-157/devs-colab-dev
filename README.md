@@ -9,17 +9,17 @@ To get started with this project, clone this repository to your local machine an
 1. Install the dependencies by running `npm install`.
 2. Create a `.env.local` file and add the following environment variables:
 
-`
-DB_HOST=[your database host] 
 
-DB_PORT=[your database port] 
+`DB_HOST=[your database host]`
 
-DB_NAME=[your database name] 
+`DB_PORT=[your database port] `
 
-DB_USER=[your database username] 
+`DB_NAME=[your database name] `
 
-DB_PASSWORD=[your database password]
-`
+`DB_USER=[your database username] `
+
+`DB_PASSWORD=[your database password]`
+
 
 
 
