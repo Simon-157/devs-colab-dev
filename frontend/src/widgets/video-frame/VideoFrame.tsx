@@ -1,4 +1,10 @@
 import { muteAudio, muteVideo } from "@/api/socket";
+import {
+  MuteAudio,
+  MuteVideo,
+  UnmuteAudio,
+  UnmuteVideo,
+} from "@/components/icons/Icons";
 import { useState } from "react";
 
 interface SingleUserVideoFrameProps {
@@ -9,7 +15,13 @@ interface SingleUserVideoFrameProps {
   onVideoStreamRemove: (userId: string) => void;
 }
 
-const SingleUserVideoFrame = ({ userId, userName, videoStream, onVideoStreamAdd, onVideoStreamRemove }: SingleUserVideoFrameProps) => {
+const SingleUserVideoFrame = ({
+  userId,
+  userName,
+  videoStream,
+  onVideoStreamAdd,
+  onVideoStreamRemove,
+}: SingleUserVideoFrameProps) => {
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(false);
 
@@ -34,25 +46,25 @@ const SingleUserVideoFrame = ({ userId, userName, videoStream, onVideoStreamAdd,
   };
 
   return (
-    <div>
+    <div className="">
       <h3>{userName}</h3>
-      <video 
+      <video
         ref={(videoRef) => {
           if (videoRef && videoStream) {
             videoRef.srcObject = videoStream;
           }
         }}
-        autoPlay 
-        muted={false} 
-        onCanPlay={handleVideoStreamAdd} 
-        onEnded={handleVideoStreamRemove} 
+        autoPlay
+        muted={false}
+        onCanPlay={handleVideoStreamAdd}
+        onEnded={handleVideoStreamRemove}
       />
       <div>
         <button onClick={toggleAudio}>
-          {isAudioMuted ? "Unmute Audio" : "Mute Audio"}
+          {isAudioMuted ? <UnmuteAudio /> : <MuteAudio />}
         </button>
         <button onClick={toggleVideo}>
-          {isVideoMuted ? "Unmute Video" : "Mute Video"}
+          {isVideoMuted ? <UnmuteVideo /> : <MuteVideo />}
         </button>
       </div>
     </div>

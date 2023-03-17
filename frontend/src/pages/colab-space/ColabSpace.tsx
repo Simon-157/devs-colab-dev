@@ -11,6 +11,7 @@ import LanguagesDropdown from "./languagedrop";
 import ThemeDropdown from "./Themedrop";
 import mainEditorFrameStyle from "./editor.module.scss";
 import { users } from "@/utils/dummy";
+import AllUsersVideo from "@/widgets/video-frame/VideoDisplay";
 
 const Room: React.FC = () => {
   const router = useRouter();
@@ -101,14 +102,20 @@ const Room: React.FC = () => {
       </div>
       <div className="flex flex-1">
         <div className="flex-1 flex flex-col">
-          <div className="flex-1">
-            <Editor
-              initialValue={code}
-              room={roomId as string}
-              theme={theme}
-              language={language}
-            />
+          <div className="flex flex-wrap">
+            <div className="flex-1">
+              <Editor
+                initialValue={code}
+                room={roomId as string}
+                theme={theme}
+                language={language}
+              />
+            </div>
+            <div className="flex-1">
+              <AllUsersVideo roomId={""} />
+            </div>
           </div>
+
           <div className="flex-none">
             <Chat room={roomId as string} />
           </div>

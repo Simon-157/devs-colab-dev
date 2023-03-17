@@ -24,13 +24,13 @@ const CodeEditor = (props: CodeEditorProps) => {
   };
 
   return (
-    <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl">
+    <div className="overlay rounded-md overflow-hidden h-full shadow-4xl">
       {!Editor ? (
         <Loader />
       ) : (
         <Editor
           height="85vh"
-          width={`60%`}
+          // width={`60%`}
           language={props.language || "javascript"}
           value={value}
           theme={props.theme}

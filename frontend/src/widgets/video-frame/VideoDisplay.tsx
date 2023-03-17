@@ -47,7 +47,7 @@ const AllUsersVideo = ({ roomId }: AllUsersVideoProps) => {
   };
 
   return (
-    <div>
+    <div className="bg-green-400">
       {Object.entries(userStreams).map(([userId, videoStream]) => (
         <SingleUserVideoFrame
           key={userId}
