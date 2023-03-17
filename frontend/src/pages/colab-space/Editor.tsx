@@ -1,34 +1,46 @@
 import { updateCode } from "@/api/socket";
-import { useState } from "react";
-import MonacoEditor from "react-monaco-editor";
+import React, { useState } from 'react';
+import Editor, { OnChange, OnMount } from '@monaco-editor/react';
+import Loader from "@/components/loader/Loader";
+
+
 
 interface CodeEditorProps {
   room: string;
   initialValue: string;
+  theme:any;
+  language:any;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ room, initialValue }) => {
-  const [code, setCode] = useState(initialValue);
+const CodeEditor = (props:CodeEditorProps) => {
+  const [value, setValue] = useState(props.initialValue);
 
-  const handleChange = (value: string) => {
-    setCode(value);
-    updateCode(room, value);
+  const handleEditorDidMount: OnMount = (editor, monaco) => {
+    console.log('Editor mounted:', editor);
+  };
+
+  const handleEditorChange: OnChange = (e, event) => {
+    console.log('Editor changed:', value);
+    setValue(e||"");
+    updateCode(props.room, props.initialValue);
   };
 
   return (
-    <MonacoEditor
-      height="calc(100vh - 80px)"
-      width="100%"
-      language="javascript"
-      theme="vs-light"
-      value={code}
-      options={{
-        fontSize: 16,
-        minimap: { enabled: false },
-        automaticLayout: true,
-      }}
-      onChange={handleChange}
-    />
+    <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl">
+        {!Editor ? (
+          <Loader />
+        ) : (
+          <Editor
+            height="85vh"
+            width={`100%`}
+            language={props.language || "javascript"}
+            value={value}
+            theme={props.theme}
+            defaultValue="// your code goes here"
+            onChange={handleEditorChange}
+            onMount={handleEditorDidMount} />
+        )}
+      </div>
   );
 };
 
