@@ -75,7 +75,7 @@ const Room: React.FC = () => {
           <ThemeDropdown handleThemeChange={handleThemeChange} theme={theme} />
         </div>
         <div className={mainEditorFrameStyle.groupButtons}>
-          <div className="px-0 py-2 flex  w-full  gap-2">
+          <div className="px-0 py-2 flex gap-2">
             <Button
               className={`bg-green-400 ${mainEditorFrameStyle.btn}`}
               variant="filled"
@@ -93,7 +93,7 @@ const Room: React.FC = () => {
             >
               exit collab
             </Button>
-            <div className="bg-gray-100 flex w-full justify-end">
+            <div className="bg-gray-100 flex w- justify-end">
               <UserList roomId={roomId as string} clients={users} />
             </div>
           </div>
