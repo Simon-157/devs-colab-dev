@@ -93,7 +93,7 @@ const Room: React.FC = () => {
             >
               exit collab
             </Button>
-            <div className="bg-gray-100 flex w- justify-end">
+            <div className="bg-gray-100 flex justify-end">
               <UserList roomId={roomId as string} clients={users} />
             </div>
           </div>
