@@ -1,5 +1,5 @@
 import { Model,DataTypes, Optional } from 'sequelize';
-require('../config/postgres');
+import sequelize from '../config/pg';
 
 interface UserAttributes {
   id: number;
@@ -46,5 +46,12 @@ User.init({
   sequelize,
   timestamps: true,
 });
+
+
+(async () => {
+  await sequelize.sync({ force: true });
+  console.log('Database synchronized');
+  // ... more code here ...
+})();
 
 export default User;

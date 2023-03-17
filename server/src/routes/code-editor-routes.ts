@@ -1,11 +1,9 @@
-import { Router } from "express";
 const express = require('express');
+import { Router } from "express";
+import { createCodeEditor, updateCodeEditor } from "../controllers/CodeEditor.controller";
 
 export const router = Router();
 
-const { createCodeEditor, updateCodeEditor } = require('../controllers/codeEditorController');
 
 router.post('/', createCodeEditor);
 router.put('/:codeEditorId', updateCodeEditor);
-
-

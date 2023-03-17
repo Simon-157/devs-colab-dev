@@ -1,11 +1,11 @@
 import { Router } from "express";
+import { createGroup } from "../controllers/Group.controller";
 
 export const router = Router();
 
-const { createGroup, getGroupById, addGroupMember } = require('../controllers/groupController');
 
 router.post('/', createGroup);
-router.get('/:groupId', getGroupById);
-router.post('/:groupId/members', addGroupMember);
+// TO DO FOR CONTROLLER CALBACK FUNCTIONS
+// router.get('/:groupId', getGroupById);
+// router.post('/:groupId/members', addGroupMember);
 
-module.exports = router;

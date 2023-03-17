@@ -1,5 +1,6 @@
-import { DataTypes } from "sequelize";
 import sequelize from "../config/pg";
+
+const { DataTypes } = require('sequelize');
 
 const Group = sequelize.define('Group', {
   id: {
@@ -21,5 +22,6 @@ const Group = sequelize.define('Group', {
     defaultValue: sequelize.fn('NOW'),
   },
 });
+
 
 export default Group;

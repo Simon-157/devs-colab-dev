@@ -1,8 +1,11 @@
-const redis = require("redis");
-const { promisify } = require("util");
+import Redis from "ioredis";
 
-const client = redis.createClient();
-const getAsync = promisify(client.get).bind(client);
-const setAsync = promisify(client.set).bind(client);
+const redisClient = new Redis(process.env.REDIS_URI as string);
+redisClient.on("error", (err: any) => {
+  console.log(err);
+});
+redisClient.on("ready", () => {
+    console.log("connected to redis instance")
+})
 
-export { client, getAsync, setAsync };
+export { redisClient };

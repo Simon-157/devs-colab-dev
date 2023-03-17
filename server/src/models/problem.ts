@@ -1,5 +1,6 @@
-import { DataTypes } from "sequelize";
 import sequelize from "../config/pg";
+
+const { DataTypes } = require('sequelize');
 
 const PracticeProblem = sequelize.define('PracticeProblem', {
   id: {
