@@ -10,6 +10,7 @@ import { Button } from "@material-tailwind/react";
 import LanguagesDropdown from "./languagedrop";
 import ThemeDropdown from "./Themedrop";
 import mainEditorFrameStyle from "./editor.module.scss";
+import { users } from "@/utils/dummy";
 
 const Room: React.FC = () => {
   const router = useRouter();
@@ -74,7 +75,7 @@ const Room: React.FC = () => {
           <ThemeDropdown handleThemeChange={handleThemeChange} theme={theme} />
         </div>
         <div className={mainEditorFrameStyle.groupButtons}>
-          <div className="px-0 py-2 flex w-max gap-2">
+          <div className="px-0 py-2 flex  w-full  gap-2">
             <Button
               className={`bg-green-400 ${mainEditorFrameStyle.btn}`}
               variant="filled"
@@ -92,6 +93,9 @@ const Room: React.FC = () => {
             >
               exit collab
             </Button>
+            <div className="bg-gray-100 flex w-full justify-end">
+              <UserList roomId={roomId as string} clients={users} />
+            </div>
           </div>
         </div>
       </div>
@@ -109,12 +113,6 @@ const Room: React.FC = () => {
             <Chat room={roomId as string} />
           </div>
         </div>
-        <div className="w-1/4 bg-gray-100 p-4">
-          <UserList roomId={roomId as string} />
-        </div>
-      </div>
-      <div className="bg-gray-100 p-4 flex-none">
-        <button onClick={handleLeave}>Leave Room</button>
       </div>
     </div>
   );

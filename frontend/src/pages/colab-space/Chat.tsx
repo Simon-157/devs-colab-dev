@@ -1,6 +1,8 @@
 import { sendMessage, subscribeToChatMessages } from "@/api/socket";
+import { Button } from "@material-tailwind/react";
 import { useState } from "react";
-import { ChatMessage } from '../../types/Chat';
+import { ChatMessage } from "../../types/Chat";
+import mainEditorFrameStyle from "./editor.module.scss";
 
 interface ChatBoxProps {
   room: string;
@@ -20,7 +22,28 @@ const ChatBox: React.FC<ChatBoxProps> = ({ room }) => {
   });
 
   return (
-    <div className="flex flex-col h-full px-4 py-2 bg-gray-200 border-t-2 border-gray-400">
+    <div className="flex flex-row h-full px-4 py-2 bg-gray-200 border-t-2 border-gray-400">
+      <div className={mainEditorFrameStyle.groupButtons}>
+        <div className="px-0 py-2 flex w-max gap-2">
+          <Button
+            className={`bg-green-400 ${mainEditorFrameStyle.btn}`}
+            variant="filled"
+            color="green"
+            //   onClick={copyRoomId}
+          >
+            save
+          </Button>
+          {/* <CollabChallenge challenge={currentChallenge} /> */}
+
+          <Button
+            className={`bg-red-400 ${mainEditorFrameStyle.btn}`}
+            //   text="exit group"
+            //   onClick={handleLeave}
+          >
+            exit collab
+          </Button>
+        </div>
+      </div>
       <div className="flex-grow mb-4 overflow-auto">
         {messages.map(({ username, message }, index) => (
           <div key={index} className="mb-2">
