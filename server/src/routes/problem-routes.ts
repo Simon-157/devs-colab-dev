@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { createProblem, getProblemById } from "../controllers/Problem.controller";
+import { createProblem, getProblemById, getProblems } from "../controllers/Problem.controller";
 
-export const router = Router();
+const router = Router();
 
 router.post('/', createProblem);
-router.get('/:problemId', getProblemById);
+router.get('/challenges/:problemId', getProblemById);
+router.get('/allproblems', getProblems)
 
+export {router};

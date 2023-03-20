@@ -7,7 +7,7 @@ const createProblem = async (req: Request, res: Response) => {
     const { title, description, solution } = req.body;
 
     const result = await pool.query(
-      "INSERT INTO practice_problems (title, description, solution) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO practiceProblem (title, description, solution) VALUES ($1, $2, $3) RETURNING *",
       [title, description, solution]
     );
 
@@ -23,7 +23,7 @@ const getProblemById = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const result = await pool.query(
-      "SELECT * FROM practice_problems WHERE id = $1",
+      "SELECT * FROM practiceProblem WHERE id = $1",
       [id]
     );
 
@@ -38,4 +38,23 @@ const getProblemById = async (req: Request, res: Response) => {
   }
 };
 
-export { createProblem, getProblemById };
+
+const getProblems = async (req: Request, res: Response) => {
+  try {
+
+    const result = await pool.query(
+      "SELECT * FROM practiceProblem"
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "No practice problem found" });
+    }
+
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export { createProblem, getProblemById, getProblems };
