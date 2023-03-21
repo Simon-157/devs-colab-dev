@@ -1,6 +1,3 @@
-// import { useState, useEffect } from "react";
-// import SingleUserVideoFrame from "./VideoFrame";
-
 import { useEffect, useState } from "react";
 import { subscribeToUserUpdates } from "@/api/socket";
 import SingleUserVideoFrame from "./VideoFrame";
@@ -29,11 +26,20 @@ const AllUsersVideo = ({ roomId }: AllUsersVideoProps) => {
     };
   }, [roomId]);
 
-  const addVideoStreamToUser = (userId: string, videoStream: MediaStream) => {
-    setUserStreams((prevStreams) => ({
-      ...prevStreams,
-      [userId]: videoStream,
-    }));
+  const addVideoStreamToUser = async (userId: string) => {
+    try {
+      const constraints = {
+        video: true,
+        audio: true,
+      };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      setUserStreams((prevStreams) => ({
+        ...prevStreams,
+        [userId]: stream,
+      }));
+    } catch (err) {
+      console.error("Error accessing camera and/or microphone:", err);
+    }
   };
 
   const removeVideoStreamFromUser = (userId: string) => {
@@ -47,6 +53,7 @@ const AllUsersVideo = ({ roomId }: AllUsersVideoProps) => {
   };
 
   return (
+    
     <div className="bg-green-400">
       {Object.entries(userStreams).map(([userId, videoStream]) => (
         <SingleUserVideoFrame
@@ -54,7 +61,7 @@ const AllUsersVideo = ({ roomId }: AllUsersVideoProps) => {
           userId={userId}
           userName={userId}
           videoStream={videoStream}
-          onVideoStreamAdd={() => addVideoStreamToUser(userId, videoStream)}
+          onVideoStreamAdd={() => addVideoStreamToUser(userId)}
           onVideoStreamRemove={() => removeVideoStreamFromUser(userId)}
         />
       ))}
@@ -63,6 +70,85 @@ const AllUsersVideo = ({ roomId }: AllUsersVideoProps) => {
 };
 
 export default AllUsersVideo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useEffect, useState } from "react";
+// import { subscribeToUserUpdates } from "@/api/socket";
+// import SingleUserVideoFrame from "./VideoFrame";
+
+// interface AllUsersVideoProps {
+//   roomId: string;
+// }
+
+// const AllUsersVideo = ({ roomId }: AllUsersVideoProps) => {
+//   const [userStreams, setUserStreams] = useState<{ [key: string]: MediaStream }>({});
+
+//   useEffect(() => {
+//     const handleUserStreams = (users: string[]) => {
+//       const streams = users.reduce<{ [key: string]: MediaStream }>((acc, curr) => {
+//         acc[curr] = new MediaStream();
+//         return acc;
+//       }, {});
+//       setUserStreams(streams);
+//     };
+
+//     subscribeToUserUpdates(handleUserStreams);
+
+//     return () => {
+//       // cleanup function
+//       setUserStreams({});
+//     };
+//   }, [roomId]);
+
+//   const addVideoStreamToUser = (userId: string, videoStream: MediaStream) => {
+//     setUserStreams((prevStreams) => ({
+//       ...prevStreams,
+//       [userId]: videoStream,
+//     }));
+//   };
+
+//   const removeVideoStreamFromUser = (userId: string) => {
+//     setUserStreams((prevStreams) => {
+//       const { [userId]: streamToRemove, ...restStreams } = prevStreams;
+//       if (streamToRemove) {
+//         streamToRemove.getTracks().forEach((track) => track.stop());
+//       }
+//       return restStreams;
+//     });
+//   };
+
+//   return (
+//     <div className="bg-green-400">
+//       {Object.entries(userStreams).map(([userId, videoStream]) => (
+//         <SingleUserVideoFrame
+//           key={userId}
+//           userId={userId}
+//           userName={userId}
+//           videoStream={videoStream}
+//           onVideoStreamAdd={() => addVideoStreamToUser(userId, videoStream)}
+//           onVideoStreamRemove={() => removeVideoStreamFromUser(userId)}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default AllUsersVideo;
 
 
 

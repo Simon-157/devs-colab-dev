@@ -22,6 +22,7 @@ const SingleUserVideoFrame = ({
   onVideoStreamAdd,
   onVideoStreamRemove,
 }: SingleUserVideoFrameProps) => {
+  console.log(videoStream)
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(false);
 

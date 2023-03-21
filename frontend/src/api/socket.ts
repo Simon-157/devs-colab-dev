@@ -1,50 +1,60 @@
-import io from "socket.io-client";
+import { io, ManagerOptions, Socket, SocketOptions } from "socket.io-client";
 
-const SOCKET_SERVER_URL = "http://localhost:4000";
+const socketOpts = {
+  // transports: ["websocket","polling"],
+  reconnectionAttempts: 5,
+  withCredentials: true,
+} as Partial<ManagerOptions & SocketOptions>;
 
-const socket = io(SOCKET_SERVER_URL);
+const SOCKET_SERVER_URL = "http://localhost:5000";
 
-export const joinRoom = (room: string) => {
+const socket = io("ws://localhost:5000", socketOpts);
+
+socket.on("connect", () => {
+  console.log(socket.id);
+});
+
+const joinRoom = (room: string) => {
   socket.emit("join", room);
 };
 
-export const leaveRoom = (room: string) => {
+const leaveRoom = (room: string) => {
   socket.emit("leave", room);
 };
 
-export const updateCode = (room: string, code: string) => {
+const updateCode = (room: string, code: string) => {
   socket.emit("code change", { room, code });
 };
 
-export const muteVideo = (room: string, action: string) => {
+const muteVideo = (room: string, action: string) => {
   socket.emit("mute", { room, action, type: "video" });
 };
 
-export const muteAudio = (room: string, action: string) => {
+const muteAudio = (room: string, action: string) => {
   socket.emit("mute", { room, action, type: "audio" });
 };
 
-export const sendMessage = (room: string, message: string) => {
+const sendMessage = (room: string, message: string) => {
   socket.emit("chat message", { room, message });
 };
 
-export const subscribeToCodeUpdates = (callback: (code: string) => void) => {
+const subscribeToCodeUpdates = (callback: (code: string) => void) => {
   socket.on("code update", callback);
 };
 
-export const subscribeToMuteEvents = (
+const subscribeToMuteEvents = (
   callback: (data: { action: string; type: string }) => void
 ) => {
   socket.on("mute", callback);
 };
 
-export const subscribeToChatMessages = (
+const subscribeToChatMessages = (
   callback: (data: { username: string; message: string }) => void
 ) => {
   socket.on("chat message", callback);
 };
 
-export const subscribeToUserUpdates = (callback: (users: string[]) => void) => {
+const subscribeToUserUpdates = (callback: (users: string[]) => void) => {
   socket.on("user joined", (user: string) => {
     socket.emit("get users", (users: string[]) => {
       callback(users);
@@ -66,4 +76,18 @@ export const subscribeToUserUpdates = (callback: (users: string[]) => void) => {
   socket.emit("get users", (users: string[]) => {
     callback(users);
   });
+};
+
+export {
+  socket,
+  joinRoom,
+  leaveRoom,
+  subscribeToChatMessages,
+  subscribeToCodeUpdates,
+  subscribeToMuteEvents,
+  subscribeToUserUpdates,
+  sendMessage,
+  muteAudio,
+  muteVideo,
+  updateCode,
 };

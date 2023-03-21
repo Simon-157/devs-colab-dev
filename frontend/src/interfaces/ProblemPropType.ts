@@ -1,11 +1,12 @@
 import { Key } from "react";
 
 export interface ProblemPropType {
-    problem_id: Key | null | undefined;
     description: string;
-    id: string;
+    id: number;
     title: string;
-    content: string;
+    difficulty_level: string;
+    created_at: Date;
+    updated_at:Date;
   }
   
   

@@ -29,7 +29,7 @@ const Challenges: React.FC<any> = (props: any) => {
   // const userRef = useRef();
   const { currentUser } = useContext(userContext);
   const { data, isLoading } = useQuery("challenges", FetchProblems);
-  // console.log(data)
+  console.log(data)
   const [activeChallenge, setActiveChallenge] = useState<ProblemPropType>();
 
   const [open, setOpen] = useState(false);
@@ -123,7 +123,7 @@ const Challenges: React.FC<any> = (props: any) => {
               {data?.map((challenge: ProblemPropType) => {
                 return (
                   <div
-                    key={challenge.problem_id}
+                    key={challenge.id}
                     // onClick={() =>{startSubmitHandler()}}
                     className={problemStyles.problemCard}
                     onClick={() => {

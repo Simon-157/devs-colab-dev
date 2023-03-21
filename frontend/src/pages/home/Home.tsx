@@ -5,7 +5,7 @@ import Image from 'next/image'
 /* Importing the components and the styles from the folder. */
 import Button from '@/components/button/Button'
 import { ArrowIcon } from '@/components/icons/Icons'
-import { userContext } from '@/contexts/userContext'
+import { useUser } from '@/contexts/userContext'
 import { LOGIN, PROBLEMS } from '@/utils/constants'
 import Footer from '@/widgets/footer/Footer'
 
@@ -14,7 +14,7 @@ import CodeShot from  "@/assets/code-shot.png"
 
 
 const Home = () => {
-  const {currentUser} = useContext(userContext)
+  const {currentUser, isCurrentUserLoading} = useUser();
 
 
   return (

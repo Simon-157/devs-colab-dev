@@ -1,8 +1,8 @@
-export interface User {
-    id: number;
-    userName: string;
-    profileImg: string;
+  export type User = {
+    userid: string;
     email: string;
-    // Add any other properties that the currentUser object is expected to have
-  }
-  
+    username: string;
+    avatarurl: string;
+    displayname: string;
+    bio: string;
+  };
