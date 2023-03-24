@@ -1,3 +1,4 @@
+import Toast from "@/components/toast/Toast";
 import Head from "next/head";
 import Home from "./home/Home";
 

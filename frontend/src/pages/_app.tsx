@@ -1,3 +1,4 @@
+import Toast from "@/components/toast/Toast";
 import UserProvider from "@/contexts/userContext";
 import "@/styles/globals.css";
 import "@/styles/styles.scss";
@@ -10,6 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <UserProvider>
+        <Toast />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
       </UserProvider>

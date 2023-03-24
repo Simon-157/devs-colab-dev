@@ -19,9 +19,9 @@ const SideBarMenu = ({
 }: SideBarMenuProps) => {
   const { data } = useQuery("challenges2", FetchProblems);
   const { currentUser } = useContext(userContext);
-  console.log(currentUser);
+  // console.log(currentUser);
   const [searchValue, setSearchValue] = useState("");
-  console.log(data);
+  // console.log(data);
   return (
     <div className={sideMenuStyles.container}>
       <div className={sideMenuStyles.sideBarWrapper}>

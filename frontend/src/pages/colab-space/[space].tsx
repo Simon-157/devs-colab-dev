@@ -6,7 +6,8 @@ import Head from "next/head";
 
 const Space = () => {
   const router = useRouter();
-  console.log(router.query);
+  const {spaceId}  = router.query?? " ";
+  console.log(spaceId);
   return (
     <>
       <Head>
@@ -16,7 +17,7 @@ const Space = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Room />
+        <Room room = {spaceId}/>
       </main>
     </>
   );

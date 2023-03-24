@@ -13,9 +13,10 @@ import mainEditorFrameStyle from "./editor.module.scss";
 import { users } from "@/utils/dummy";
 import AllUsersVideo from "@/widgets/video-frame/VideoDisplay";
 
-const Room: React.FC = () => {
+const Room = (room:any) => {
   const router = useRouter();
-  const { roomId } = router.query;
+  const [roomId, setRoomId] = useState(room);
+
   const [code, setCode] = useState("");
   //  const [code, setCode] = useState(problem);
   const [customInput, setCustomInput] = useState("");
@@ -26,7 +27,7 @@ const Room: React.FC = () => {
 
   const handleLeave = () => {
     leaveRoom(roomId as string);
-    router.push("/");
+    router.push("/problems");
   };
 
   const handleCodeChange = (newCode: string) => {
@@ -81,7 +82,7 @@ const Room: React.FC = () => {
               className={`bg-green-400 ${mainEditorFrameStyle.btn}`}
               variant="filled"
               color="green"
-              //   onClick={copyRoomId}
+                // onClick={copyRoomId}
             >
               save
             </Button>

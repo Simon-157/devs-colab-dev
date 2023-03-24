@@ -1,6 +1,6 @@
 /* Importing the necessary libraries for the component to work. */
 
-import React, { useContext, Fragment, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import { v4 } from "uuid";
@@ -21,20 +21,18 @@ import problemStyles from "./problem-styles.module.scss";
 import Loader from "../../components/loader/Loader";
 import FetchProblems from "@/api/FetchProblems";
 import { ProblemPropType } from "@/interfaces/ProblemPropType";
+import { createColab, joinRoom } from "@/api/socket";
 
 const Challenges: React.FC<any> = (props: any) => {
-  //   const [error, setError] = useState(false);
-  //   const [errorMsg, setErrorMsg] = useState(" ");
-  // const roomRef = useRef();
-  // const userRef = useRef();
   const { currentUser } = useContext(userContext);
   const { data, isLoading } = useQuery("challenges", FetchProblems);
-  console.log(data)
+  // console.log(currentUser);
   const [activeChallenge, setActiveChallenge] = useState<ProblemPropType>();
 
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [roomId, setRoomId] = useState("");
+  const [roomName, setRoomName] = useState("");
   const router = useRouter();
   const handleOpen = () => {
     setOpen(!open);
@@ -47,34 +45,49 @@ const Challenges: React.FC<any> = (props: any) => {
     setActiveChallenge(e);
   };
 
-  const createNewRoom = (e: any) => {
+  const createNewRoom = async (e: any) => {
     e.preventDefault();
     const id = v4();
     setRoomId(id);
+
+      // TODO:: CREATE NEW SOCKET ROOM
+      // roomId, roomName, user, challenge
+    createColab(id, roomName, currentUser?.userid ?? "", activeChallenge?.id ?? -1);
+
     toast.success("Created a new collab");
   };
 
-  const joinRoom = () => {
+  const joinCollab = (roomId:string, roomName:string) => { //TODO: WILL REMOVE roomName, once backend retrievl of roomdata for the given roomd
+    
     if (!roomId) {
       toast.error("ROOM ID & username is required");
       return;
     }
 
+    if (!roomName) {
+      toast.error("Room name is required");
+      return;
+    }
+    console.log(roomId, roomName);
     // Redirect
+
+    // TODO:: JOIN USER TO A ROOM
+    joinRoom(roomId, currentUser?.userid?? "Anonymous");
+    
 
     router.push(
       {
-        pathname: `/problems/${roomId}`,
+        pathname: `/colab-space/${roomId}`,
         query: {
           title: activeChallenge?.title ?? "",
           content: activeChallenge?.description ?? "",
           user: JSON.stringify({
-            username: currentUser?.userName,
-            avatar: currentUser?.profileImg,
+            username: currentUser?.username,
+            avatar: currentUser?.avatarurl,
           }),
         },
       },
-      `/problems/${roomId}`
+      `/colab-space/${roomId}`
     );
   };
 
@@ -112,7 +125,7 @@ const Challenges: React.FC<any> = (props: any) => {
                 />
               </DialogBody>
               <DialogFooter>
-                <Button variant="text" color="green" onClick={joinRoom}>
+                <Button variant="text" color="green" onClick={() => joinCollab(roomId, "Giants")}>
                   <span>Join</span>
                 </Button>
               </DialogFooter>
@@ -159,6 +172,15 @@ const Challenges: React.FC<any> = (props: any) => {
                 placeholder="read only"
                 readOnly
               />
+
+              <Input
+                className="w-auto"
+                variant="outlined"
+                label="Room Name"
+                onChange={(e) => setRoomName(e.target.value)}
+                id="roomName"
+                placeholder="e.g warrior devs"
+              />
             </DialogBody>
             <DialogFooter>
               <Button
@@ -179,7 +201,7 @@ const Challenges: React.FC<any> = (props: any) => {
                     variant="text"
                     color="blue"
                     className="bg-sky-50"
-                    onClick={joinRoom}
+                    onClick={() => joinCollab(roomId, roomName)}
                   >
                     {" "}
                     Start

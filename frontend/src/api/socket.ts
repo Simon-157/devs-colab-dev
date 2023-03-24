@@ -14,9 +14,15 @@ socket.on("connect", () => {
   console.log(socket.id);
 });
 
-const joinRoom = (room: string) => {
-  socket.emit("join", room);
+const joinRoom = (roomId: string, user:string) => {
+  // user is the id of the user
+  console.log("Room Id: , ", roomId)
+  socket.emit("join", {roomId, user});
 };
+
+const createColab = (roomId: string, roomName:string, user: string, challenge: number) => {
+  socket.emit("create", { roomId, roomName, user, challenge });
+}
 
 const leaveRoom = (room: string) => {
   socket.emit("leave", room);
@@ -81,6 +87,7 @@ const subscribeToUserUpdates = (callback: (users: string[]) => void) => {
 export {
   socket,
   joinRoom,
+  createColab,
   leaveRoom,
   subscribeToChatMessages,
   subscribeToCodeUpdates,
